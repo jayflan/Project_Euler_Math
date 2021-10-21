@@ -1,22 +1,18 @@
-const singleMultipleSum = (num, numTargetRange) => {
-  let sum = 0;
-  for(let i = num; i < numTargetRange; i += num) {
-    sum += i;
-  } 
-  return sum;
+const multipleSum = (numA, numB, range) => {
+  let sumA = 0, sumB = 0;
+  
+  for(let i = numA; i < range; i += numA) {
+    sumA += i;
+  };
+
+  for(let i = numB; i < range; i += numB) {
+    //don't double sum in sum varialbes if numA & numB are divisable;
+    if(!Number.isInteger(sumB + i/numA)) sumB += i;
+  };
+
+  return sumA + sumB;
+
 };
 
-const multiMultipleSum = (...callbackFn) => {
-  let arrArgs = [...callbackFn];
-  return arrArgs.reduce((accum, currArg) => {
-    accum += currArg;
-    return accum;
-  }, 0);
-};
 
-const multipleOf03 = singleMultipleSum(3, 1000);
-const multipleOf05 = singleMultipleSum(5, 1000)
-const totalSum = multiMultipleSum(multipleOf03, multipleOf05);
-
-console.log(totalSum);
-// console.log(multipleOf05);
+console.log(multipleSum(3, 5, 1000));
